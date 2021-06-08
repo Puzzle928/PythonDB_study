@@ -1,0 +1,72 @@
+DB연동
+
+1. 실습 준비
+    1. db설치 및 실행중
+    2. python 개발 환경 구축
+        anaconda 설치
+        접속 db에 종속적인 driver 설치(*)
+            db별로 다름
+            db벤더사가 제공
+    3. pythom 코드로 db 연동 확인
+
+2. 설치 명령어 anaconda 명령프롬프트
+    cs_Oracle 이라는 이름(모듈 또는 package)
+
+    1. python 연동 oracle driver 설치 여부 확인
+        > pip list    or    > conda list
+
+    2. 설치
+        >pip unstall cx_Oracle
+        >conda install cx_Oracle
+
+3.python기반의 db연동 개발 단계
+    1단계 : oracle 접속
+        db의 ip/ id/ pw/ 개별DB별 별칭(database service name(dns)) / port
+        로컬 시스템에서 축약된 표현 : id/pw/dns
+            SCOTT/TIGER/XE
+            hr/hr/XE
+    2단계
+        접속된 db에 sql 문장 결과값을 활용
+    
+    3단계
+        실행된 sql문장 결과값을 활용
+    
+    4단계
+        사용했던 자원들 반납
+
+        모든 유저들이 기본적으로 지켜야 할 매너 로그아웃 필수
+        close()
+
+4. python 특징
+    python 내부적으로 모든 타입을 객체 타입으로 관리
+    객체 - 데이터와 기능을 보유한 구조
+        대표적인 예시
+            학사 관리 프로그램
+                교수/학생/행정직 ...다양한 서비스 로직 존재
+                어떤 교수가 무슨 과목을 몇명의 학생들에게..
+                어떤 학생이 몇명의 교수로 부터 몇개의 과목을 수강?...
+
+                학생의 정보 관리
+                    class Student:
+                        def __init__(self, 이름, 학번, 학년):
+                        ...
+
+                    class 교수:
+                        def __init__(self, 이름, 나이, 과목):
+                        ...
+5. 실습 확장 단계
+    CRUD 로직별로 함수 별도로 구현
+    C :insert r: select u: update d: delete
+
+6. 개발시 고려 사항
+    driver 로딩 - import 문장
+
+
+    connection 객체 생성 - 다수의 user 가 공유 금지
+    sql문장 실행 가능한 cursor  생성
+    sql 문장 실행
+    데이터 활용
+    자원반환 - skip 불가
+
+    - 함수와 독립적으로 개별 구현 가능한 로직
+      (모든 함수가 공유하게 할 만한 로직)
